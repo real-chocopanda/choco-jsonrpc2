@@ -11,7 +11,7 @@ var server = new rpc.Server();
 /**
  * ping return pong
  */
-server.expose('ping', function(callback) {
+server.expose('ping', function(params, callback) {
     //...
     
     if (err) {

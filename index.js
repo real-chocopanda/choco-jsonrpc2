@@ -121,7 +121,7 @@ JsonRPCServer.prototype.handlePOST = function(req, res) {
         
         method = JsonRPCServer.functions[decoded.method];
         
-        return method(function(err, result) {
+        return method(decoded.params, function(err, result) {
             if (err) {
                 if ('object' == typeof(err)) {
                     return JsonRPCServer.sendError(decoded, err, res); 
