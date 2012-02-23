@@ -4,7 +4,7 @@
 ## Usage
 
 ```js
-var rpc = require('jsonrpc2');
+var rpc = require('choco-jsonrpc2');
 
 var server = new rpc.Server();
 
