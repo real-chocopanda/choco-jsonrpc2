@@ -1,0 +1,11 @@
+{
+   "name": "choco-jsonrpc2",
+   "preferGlobal": true,
+   "version": "0.0.1",
+   "author": "Cedric LOMBARDOT <cedric.lombardot@gmail.com>",
+   "description": "A JSON RPC2.0 server",
+   "engines": {
+     "node": "0.6",
+     "npm": "1.1.1"
+   }
+}
