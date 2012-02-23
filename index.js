@@ -93,7 +93,7 @@ JsonRPCServer.prototype.handleRequest = function(req, res) {
  * @param res ServerResponse
  */
 JsonRPCServer.prototype.handleNonPOST = function(req, res) {
-    JsonRPCServer.sendError({ id: null }, this.error_messages.POST_REQUIRED, res);
+    JsonRPCServer.sendError({ id: null }, JsonRPCServer.error_messages.POST_REQUIRED, res);
 };
 
 /**
@@ -112,11 +112,11 @@ JsonRPCServer.prototype.handlePOST = function(req, res) {
         var decoded = JSON.parse(buffer);
 
         if(!(decoded.method && decoded.params && decoded.id != 'undefined')) {
-            return JsonRPCServer.sendError(decoded, this.error_messages.INVALID_REQUEST, res);
+            return JsonRPCServer.sendError(decoded, JsonRPCServer.error_messages.INVALID_REQUEST, res);
         }
         
         if(!JsonRPCServer.functions.hasOwnProperty(decoded.method)) {
-            return JsonRPCServer.sendError(decoded, this.error_messages.METHOD_NOT_FOUND, res);
+            return JsonRPCServer.sendError(decoded, JsonRPCServer.error_messages.METHOD_NOT_FOUND, res);
         }
         
         method = JsonRPCServer.functions[decoded.method];
