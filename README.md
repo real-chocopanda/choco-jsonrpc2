@@ -1,5 +1,11 @@
 # Json RPC2 Server for nodejs
 
+## Setup
+
+```
+npm install choco-jsonrpc2
+```
+
 ## Usage
 
 ```js
