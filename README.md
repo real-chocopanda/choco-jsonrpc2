@@ -36,3 +36,10 @@ server.expose('ping', function(params, callback) {
 
 server.listen(3000, 'localhost');
 ```
+
+## TODO
+
+* Add tests
+* Implement batch imports
+* Add samples
+
