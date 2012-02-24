@@ -57,9 +57,9 @@ JsonRPCServer.prototype.desc = function (service, params, returns) {
  * @param name
  * @param callack
  */
-JsonRPCServer.prototype.expose = function (name, callack) {
+JsonRPCServer.prototype.expose = function (name, callback) {
     this.trace('***', 'exposing: ' + name);
-    this.functions[name] = callack;
+    this.functions[name] = callback;
 };
 
 /**
