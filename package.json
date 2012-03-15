@@ -6,6 +6,6 @@
    "repository": "git://github.com/real-chocopanda/choco-jsonrpc2.git",
    "engines": {
      "node": "0.6",
-     "npm": ">= 1.1.0"
+     "npm": ">= 1.0.0"
    }
 }
