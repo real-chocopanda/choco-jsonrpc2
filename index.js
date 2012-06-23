@@ -1,4 +1,4 @@
-var sys = require('sys');
+var util = require('util');
 var http = require('http');
 
 function JsonRPCServer() {
@@ -69,7 +69,7 @@ JsonRPCServer.prototype.expose = function (name, callback) {
  * @param message
  */
 JsonRPCServer.prototype.trace = function (direction, message) {
-    sys.puts('   ' + direction + '   ' + message);
+    util.puts('   ' + direction + '   ' + message);
 };
 
 /**
