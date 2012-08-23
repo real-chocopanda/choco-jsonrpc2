@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/real-chocopanda/choco-jsonrpc2.png)](http://travis-ci.org/real-chocopanda/choco-jsonrpc2)
 # Json RPC2 Server for nodejs
 
 ## Setup
