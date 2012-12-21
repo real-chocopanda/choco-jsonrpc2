@@ -182,7 +182,7 @@ JsonRPCServer.prototype.handlePOST = function(req, res) {
             return JsonRPCServer.sendError(decoded, JsonRPCServer.error_messages.METHOD_NOT_FOUND, res);
         }
 
-        method = JsonRPCServer.functions[decoded.method];
+        var method = JsonRPCServer.functions[decoded.method];
 
         return method(decoded.params, function(err, result) {
             if (err) {
