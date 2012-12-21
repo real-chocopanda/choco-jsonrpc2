@@ -84,6 +84,15 @@ JsonRPCServer.prototype.listen = function(port, host) {
 };
 
 /**
+ * Return the exact address of the server (proxy to http.address())
+ *
+ * @return Object with three properties, i.e.: { port: 12346, family: 'IPv4', address: '127.0.0.1' }
+ */
+JsonRPCServer.prototype.address = function() {
+    return this.server.address();
+};
+
+/**
  * Create an http server
  *
  * @return httpServer
@@ -173,7 +182,7 @@ JsonRPCServer.prototype.handlePOST = function(req, res) {
             return JsonRPCServer.sendError(decoded, JsonRPCServer.error_messages.METHOD_NOT_FOUND, res);
         }
 
-        method = JsonRPCServer.functions[decoded.method];
+        var method = JsonRPCServer.functions[decoded.method];
 
         return method(decoded.params, function(err, result) {
             if (err) {
