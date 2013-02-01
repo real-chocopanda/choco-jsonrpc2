@@ -172,33 +172,37 @@ JsonRPCServer.prototype.handlePOST = function(req, res) {
     });
 
     req.addListener('end', function(data) {
-        var decoded = JSON.parse(buffer);
+        try {
+            var decoded = JSON.parse(buffer);
 
-        if(!(decoded.method && decoded.params && decoded.id != 'undefined')) {
-            return JsonRPCServer.sendError(decoded, JsonRPCServer.error_messages.INVALID_REQUEST, res);
-        }
-
-        if(!JsonRPCServer.functions.hasOwnProperty(decoded.method)) {
-            return JsonRPCServer.sendError(decoded, JsonRPCServer.error_messages.METHOD_NOT_FOUND, res);
-        }
-
-        var method = JsonRPCServer.functions[decoded.method];
-
-        return method(decoded.params, function(err, result) {
-            if (err) {
-                if ('object' == typeof(err)) {
-                    return JsonRPCServer.sendError(decoded, err, res);
-                }
-
-                return JsonRPCServer.sendError(decoded, { code: err, message: result }, res);
+            if(!(decoded.method && decoded.params && decoded.id != 'undefined')) {
+                return JsonRPCServer.sendError(decoded, JsonRPCServer.error_messages.INVALID_REQUEST, res);
             }
 
-            return JsonRPCServer.sendResponse(res, {
-                "result": result,
-                "id": decoded.id || null
-            });
+            if(!JsonRPCServer.functions.hasOwnProperty(decoded.method)) {
+                return JsonRPCServer.sendError(decoded, JsonRPCServer.error_messages.METHOD_NOT_FOUND, res);
+            }
 
-        });
+            var method = JsonRPCServer.functions[decoded.method];
+
+            return method(decoded.params, function(err, result) {
+                if (err) {
+                    if ('object' == typeof(err)) {
+                        return JsonRPCServer.sendError(decoded, err, res);
+                    }
+
+                    return JsonRPCServer.sendError(decoded, { code: err, message: result }, res);
+                }
+
+                return JsonRPCServer.sendResponse(res, {
+                    "result": result,
+                    "id": decoded.id || null
+                });
+
+            });
+        } catch(SyntaxError) {
+            return JsonRPCServer.sendError({id: null}, JsonRPCServer.error_messages.PARSE_ERROR, res);
+        }
     });
 
 };
