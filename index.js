@@ -172,7 +172,11 @@ JsonRPCServer.prototype.handlePOST = function(req, res) {
     });
 
     req.addListener('end', function(data) {
-        var decoded = JSON.parse(buffer);
+        try {
+          var decoded = JSON.parse(buffer);
+        } catch (SyntaxError) {
+          return JsonRPCServer.sendError({id: null, 'result': SyntaxError}, JsonRPCServer.error_messages.PARSE_ERROR, res);
+        }
 
         if(!(decoded.method && decoded.params && decoded.id != 'undefined')) {
             return JsonRPCServer.sendError(decoded, JsonRPCServer.error_messages.INVALID_REQUEST, res);
