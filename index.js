@@ -2,6 +2,7 @@ var util = require('util');
 var http = require('http');
 
 function JsonRPCServer() {
+    this.debugMode = false;
     this.functions = [];
     this.descriptions = [];
     this.server = this.createServer();
@@ -69,7 +70,21 @@ JsonRPCServer.prototype.expose = function (name, callback) {
  * @param message
  */
 JsonRPCServer.prototype.trace = function (direction, message) {
+    if (!this.debugMode) {
+      return;
+    }
+
     util.puts('   ' + direction + '   ' + message);
+};
+
+/**
+ * To set debug mode explicity
+ *
+ * @param boolean
+ */
+
+JsonRPCServer.prototype.setDebug = function (status) {
+    this.debugMode = (status === true);
 };
 
 /**
