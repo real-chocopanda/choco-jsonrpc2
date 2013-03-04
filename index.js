@@ -29,6 +29,7 @@ function JsonRPCServer() {
 JsonRPCServer.prototype.desc = function (service, params, returns) {
     this.trace('***', 'describe: ' + service);
 
+    var name;
     for (name in params) {
         if ('string' == typeof(params[name])) {
             params[name] = { type: params[name] };
@@ -152,6 +153,7 @@ JsonRPCServer.prototype.handleNonPOST = function(req, res) {
         services: {}
     };
 
+    var name;
     for (name in JsonRPCServer.functions) {
         SMD.services[name] = {
                                 envelope: "JSON-RPC-2.0",
