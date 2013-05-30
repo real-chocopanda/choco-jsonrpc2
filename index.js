@@ -94,9 +94,10 @@ JsonRPCServer.prototype.setDebug = function (status) {
  * @param port
  * @param host
  */
-JsonRPCServer.prototype.listen = function(port, host) {
-    this.server.listen(port, host);
-    this.trace('***', 'Server listening on http://' + (host || '127.0.0.1') + ':' + port + '/');
+JsonRPCServer.prototype.listen = function(port, host, callback) {
+    this.server.listen(port, host, callback);
+    typeof host !== 'string' && (host = '127.0.0.1');
+    this.trace('***', 'Server listening on http://' + host + ':' + port + '/');
 };
 
 /**
